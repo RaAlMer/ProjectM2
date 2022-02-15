@@ -6,6 +6,10 @@
   "scripts": {
     "start": "nodemon server.js"
   },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
