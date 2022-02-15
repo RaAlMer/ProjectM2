@@ -11,25 +11,55 @@ router.get('/signup', (req, res, next) => res.render('user/signup'));
 
 // POST route to create account
 router.post('/signup', async (req, res, next) => {
-    const { username, email, password, repeatPassword } = req.body;
-    if (password === repeatPassword){
-        try {
-            const salt = await bcrypt.genSalt(saltRounds);
-            const hashedPassword = await bcrypt.hash(password, salt);
-            const user = await User.create({
-                username,
-                email,
-                password: hashedPassword,
-            });
-            await user.save();
-            res.redirect('/');
-        } catch (error){
-            console.log(error)
-            res.redirect('/signup');
-        }
-    } else {
-        res.redirect('/signup');
-    };
+  const { username, email, password, repeatPassword } = req.body;
+  if (password === repeatPassword) {
+    try {
+      const salt = await bcrypt.genSalt(saltRounds);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      const user = await User.create({
+        username,
+        email,
+        password: hashedPassword,
+      });
+      await user.save();
+      res.redirect('/');
+    } catch (error) {
+      console.log(error);
+      res.redirect('/signup');
+    }
+  } else {
+    res.redirect('/signup');
+  }
 });
+
+// GET route to log in page
+
+router.get('/login', (req, res) => {
+  res.render('user/login');
+});
+
+// Post route to log in page
+
+router.post("/login", async (req, res) => {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+      const isPwCorrect = await bcrypt.compare(req.body.password, user.password);
+      if (isPwCorrect) {
+        req.session.currentUser = user;
+        res.redirect("/profile");
+      } else {
+        res.redirect("/login");
+      }
+    } catch (error) {
+      res.redirect("/login");
+    }
+  });
+
+
+
+// Get route to Profile page
+
+router.get("/profile", isLoggedIn, (req,res)=> res.render("user/myprofile",{user:req.session.currentUser}))
+
 
 module.exports = router;
