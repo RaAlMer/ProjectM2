@@ -49,4 +49,8 @@ app.get("/", (req, res) => {
 const userRouter = require('./routes/user.routes');
 app.use('/', userRouter);
 
+// Post route
+const postRouter = require('./routes/post.routes');
+app.use('/posts', postRouter);
+
 app.listen(process.env.PORT);

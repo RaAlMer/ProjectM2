@@ -1,0 +1,78 @@
+<label for="title">Title:*</label>
+<br>
+<input
+  type="text"
+  name="title"
+  required
+  placeholder="title"
+  value="<%= post.title %>"
+/>
+<br />
+<label for="image">Image:*</label>
+<br>
+<input
+  type="text"
+  name="image"
+  required
+  placeholder="image"
+  value="<%= post.image %>"
+/>
+<br />
+<label for="description">Description:*</label>
+<br>
+<textarea name="description" cols="30" rows="10" required>
+<%= post.description %></textarea
+>
+<br />
+<label for="longitude">Longitude:</label>
+<br>
+<input
+  type="number"
+  step="any"
+  name="longitude"
+  placeholder="longitude"
+  value="<%= post.longitude %>"
+/>
+<br>
+<label for="latitude">Latitude:</label>
+<br />
+<input
+  type="number"
+  step="any"
+  name="latitude"
+  placeholder="latitude"
+  value="<%= post.latitude %>"
+/>
+<br />
+<label for="city">City:*</label>
+<br>
+<input
+  type="text"
+  name="city"
+  required
+  placeholder="city"
+  value="<%= post.city %>"
+/>
+<br />
+<label for="country">Country:*</label>
+<br>
+<input
+  type="text"
+  name="country"
+  required
+  placeholder="country"
+  value="<%= post.country %>"
+/>
+<br />
+
+<input type="radio" id="low" name="level" value="Low" checked />
+<label for="low">Low</label><br />
+<input type="radio" id="moderate" name="level" value="Moderate" />
+<label for="moderate">Moderate</label><br />
+<input type="radio" id="high" name="level" value="High" />
+<label for="high">High</label><br />
+<input type="radio" id="extreme" name="level" value="Extreme" />
+<label for="extreme">Extreme</label>
+
+<br />
+<button type="submit">submit</button>

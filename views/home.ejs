@@ -1,4 +1,13 @@
 <h1>home page</h1>
-<a href="/signup"> Sign Up page</a>
+<%  if (!currentUser) { %>
+    <a href="/signup"> Sign Up page</a>
+    <br>
+    <a href="/login"> Log in page</a>
+<% } else{ %>
+    
+    <a href="/profile/<%= currentUser._id %> ">My profile</a>
 <br>
-<a href="/login"> Log in page</a>
+    <a href="/logout">Log Out</a>
+    <% } %>
+ 
+
