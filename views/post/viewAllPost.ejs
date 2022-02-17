@@ -11,8 +11,13 @@
                     <p><%= post.longitude %></p>
                 <% } %>
             </a>
+            <a href="/posts/upvote/<%= post.id %> "><i class="fa fa-thumbs-up" aria-hidden="true" ></i></a>
+           
+            <a href="/posts/downvote/<%= post.id %> "><i class="fa fa-thumbs-down" aria-hidden="true" ></i></a>
+            <span><%= post.upVote.length - post.downVote.length  %></span>
+            <br>
             <% if (post.user.toString() === currentUser._id) { %>
-                <a href="/posts/edit">Edit post</a>
+                <a href="/posts/edit/<%= post.id %>">Edit post</a>
                 <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
                     <button type="submit">Delete post</button>
                 </form>
