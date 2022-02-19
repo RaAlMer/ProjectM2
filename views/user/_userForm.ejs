@@ -1,0 +1,39 @@
+<label for="username">Username:</label>
+<br>
+<input
+  type="text"
+  name="username"
+  required
+  placeholder="username"
+  value="<%= user.username %>"
+/>
+<br />
+<!-- <label for="image">Image:*</label>
+<br>
+<input
+  type="text"
+  name="image"
+  required
+  placeholder="image"
+  value=""
+/> -->
+<br />
+<label for="country">Country:</label>
+<br>
+<input type="text" name="country" placeholder="country" value="<%= user.country %>">
+<br />
+<label for="gender">Gender:</label>
+
+<br />
+
+<input type="radio" id="male" name="gender" value="Male"  />
+<label for="male">Male</label><br />
+<input type="radio" id="female" name="gender" value="Female" />
+<label for="female">Female</label><br />
+<input type="radio" id="preferNotToTell" name="gender" value="Prefer not to tell" />
+<label for="preferNotToTell">Prefer not to tell</label><br />
+<input type="radio" id="notSpecified" name="gender" value="Not specified" checked/>
+<label for="notSpecified">Not specified</label>
+
+<br />
+<button type="submit">submit</button>

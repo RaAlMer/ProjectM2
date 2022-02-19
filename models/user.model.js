@@ -22,17 +22,20 @@ const userSchema = new Schema(
     score: {
         type: Number,
         min: 0,
+        default: 0,
     },
     img: {
         type: String,
-        default: '../public/images/pngaaa.com-1721400.png',
+        default: 'https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png',
     },
     country: {
         type: String,
+        default: "Narnia"
     },
     gender: {
         type: String,
-        enum: ['Male', 'Female', 'Prefer not to tell'],
+        default: "Not specified",
+        enum: ['Male', 'Female', 'Prefer not to tell',"Not specified"],
     }
   },
   {

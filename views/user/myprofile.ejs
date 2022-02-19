@@ -1,7 +1,16 @@
-<h2>My profile page</h2>
+<h2>Profile page</h2>
 
+<br />
 
-<h3>email: <%= user.email %> </h3>
+<img src="<%= user.img %> " alt="avatar" />
+<h3>User: <%= user.username %></h3>
+<h3>Gender: <%= user.gender %> </h3>
+<h3>Email: <%= user.email %></h3>
+<p>Country: <%= user.country %> </p>
+<h4>Score: <%= user.score %> </h4>
 
-
+<%- console.log(user.img) %>
+<br>
+<a href="/editProfile/<%= user.id %>">Edit Profile</a>
+<br>
 <a href="/">Back Home</a>

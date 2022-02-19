@@ -16,11 +16,13 @@
             <a href="/posts/downvote/<%= post.id %> "><i class="fa fa-thumbs-down" aria-hidden="true" ></i></a>
             <span><%= post.upVote.length - post.downVote.length  %></span>
             <br>
+            <% if (currentUser) { %>
             <% if (post.user.toString() === currentUser._id) { %>
                 <a href="/posts/edit/<%= post.id %>">Edit post</a>
                 <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
                     <button type="submit">Delete post</button>
                 </form>
+            <% } %>
             <% } %>
         </li>   
     <% }) %>
