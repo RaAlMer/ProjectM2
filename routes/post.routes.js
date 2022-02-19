@@ -12,27 +12,31 @@ router.get('/create', isLoggedIn, (req, res) => {
 });
 
 // Route POST
-router.post('/create', isLoggedIn,imgUploader.single('image'), async (req, res) => {
-  req.post = new Post();
-  req.post.title = req.body.title;
-  console.log(req)
-  req.post.image = req.file.path;
-  req.post.description = req.body.description;
-  req.post.city = req.body.city;
-  req.post.country = req.body.country;
-  req.post.level = req.body.level;
-  req.post.longitude = req.body.longitude;
-  req.post.latitude = req.body.latitude;
-  req.post.user = req.session.currentUser._id;
-  try {
-    await req.post.save();
-    res.redirect('/');
-  } catch (error) {
-    console.log(error)
-    res.redirect('/posts/createPost');
-    
+router.post(
+  '/create',
+  isLoggedIn,
+  imgUploader.single('image'),
+  async (req, res) => {
+    req.post = new Post();
+    req.post.title = req.body.title;
+    console.log(req);
+    req.post.image = req.file.path;
+    req.post.description = req.body.description;
+    req.post.city = req.body.city;
+    req.post.country = req.body.country;
+    req.post.level = req.body.level;
+    req.post.longitude = req.body.longitude;
+    req.post.latitude = req.body.latitude;
+    req.post.user = req.session.currentUser._id;
+    try {
+      await req.post.save();
+      res.redirect('/');
+    } catch (error) {
+      console.log(error);
+      res.redirect('/posts/createPost');
+    }
   }
-});
+);
 
 // GET route to show all posts
 router.get('/all', async (req, res) => {
@@ -78,8 +82,8 @@ router.get('/upvote/:id', isLoggedIn, async (req, res) => {
   if (!post.upVote.includes(req.session.currentUser._id)) {
     post.upVote.push(req.session.currentUser._id);
   }
-  post.save()
-  res.redirect("/posts/all")
+  post.save();
+  res.redirect('/posts/all');
 });
 
 //Route for downVote
@@ -92,8 +96,8 @@ router.get('/downvote/:id', isLoggedIn, async (req, res) => {
   if (!post.downVote.includes(req.session.currentUser._id)) {
     post.downVote.push(req.session.currentUser._id);
   }
-  post.save()
-  res.redirect("/posts/all")
+  post.save();
+  res.redirect('/posts/all');
 });
 
 // DELETE route delete post
@@ -102,12 +106,13 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
   res.redirect('/posts/all');
 });
 
-
 //Get Route to see the post detail
 
-router.get("/postDetail/:id", isLoggedIn, async (req,res)=>{
-  const post = await Post.findById(req.params.id).populate("user")
-  res.render("post/postDetail", {post})
-})
+router.get('/postDetail/:id', isLoggedIn, async (req, res) => {
+  const post = await Post.findById(req.params.id)
+    .populate('user')
+    .populate('comments');
+  res.render('post/postDetail', { post });
+});
 
 module.exports = router;

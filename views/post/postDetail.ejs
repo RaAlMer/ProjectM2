@@ -1,31 +1,69 @@
-
-  <div>
-    <h2><%= post.title %> </h2><h4>Created by: <a href="/profile/<%= post.user._id %> "><%= post.user.username %></a>  </h4>
-    <img src="<%= post.image %>" alt="Image" />
-    <p><%= post.description %></p>
-    <p><%= post.level%></p>
-    <p><%= post.city %>, <%= post.country %></p>
-    <% if (post.latitude && post.longitude) { %>
-    <p><%= post.latitude %></p>
-    <p><%= post.longitude %></p>
-    <% } %>
-  </div>
-
-
-  <a href="/posts/upvote/<%= post.id %> "
-    ><i class="fa fa-thumbs-up" aria-hidden="true"></i
-  ></a>
-  
-  <a href="/posts/downvote/<%= post.id %> "
-    ><i class="fa fa-thumbs-down" aria-hidden="true"></i
-  ></a>
-  <span><%= post.upVote.length - post.downVote.length %></span>
+<div>
+  <h2><%= post.title %></h2>
+  <small>
+    Created by:
+    <a href="/profile/<%= post.user._id %> "><%= post.user.username %></a>
+  </small>
   <br />
-  <% if (currentUser) { %> <% if (post.user.toString() === currentUser._id) { %>
-  <a href="/posts/edit/<%= post.id %>">Edit post</a>
-  <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
-    <button type="submit">Delete post</button>
-  </form>
-  <% } %> <% } %>
+
+  <img src="<%= post.image %>" alt="Image" />
+  <br />
+  <br />
+  <label for="description">Description:</label>
+  <p><%= post.description %></p>
+  <br />
+  <label for="level">Level:</label>
+  <p><%= post.level%></p>
+  <br />
+  <label for="location">Location:</label>
+  <p><%= post.city %>, <%= post.country %></p>
+  <br />
+  <label for="coords">Latitude and Longitude:</label>
+  <% if (post.latitude && post.longitude) { %>
+  <p><%= post.latitude %></p>
+  <p><%= post.longitude %></p>
+  <% } %>
+</div>
+
+<a href="/posts/upvote/<%= post.id %> "
+  ><i class="fa fa-thumbs-up" aria-hidden="true"></i
+></a>
+
+<a href="/posts/downvote/<%= post.id %> "
+  ><i class="fa fa-thumbs-down" aria-hidden="true"></i
+></a>
+<span><%= post.upVote.length - post.downVote.length %></span>
+<br />
+<% if (currentUser) { %> <% if (post.user.toString() === currentUser._id) { %>
+<a href="/posts/edit/<%= post.id %>">Edit post</a>
+<form action="/posts/<%= post.id %>?_method=DELETE" method="post">
+  <button type="submit">Delete post</button>
+</form>
+<% } %> <% } %>
+<br />
+<br />
+<h4>Comments:</h4>
+<ul>
+  <% post.comments.forEach((comment)=>{%>
+  <li>
+    <%= comment.title %>
+    <br />
+    <%= comment.description %>
+    <br />
+    <small
+      >Posted at: <%= comment.createdAt.toLocaleDateString() %> <%=
+      comment.createdAt.toLocaleTimeString() %>
+    </small>
+  </li>
+  <% }) %>
+</ul>
+
+<form action="/comment/<%= post.id %> " method="post">
+  <input type="text" name="title" placeholder="title" />
+  <br />
+  <textarea name="description"></textarea>
+  <br />
+  <button type="submit">Comment</button>
+</form>
 
 <a href="/posts/all">Back All Posts</a>
