@@ -2,6 +2,7 @@ const { Router } = require('express');
 const router = new Router();
 const Post = require('../models/post.model');
 const { isLoggedIn } = require('../middlewares/guard');
+const imgUploader = require('../cloudinary.config');
 
 // Route to create Post
 
@@ -11,10 +12,11 @@ router.get('/create', isLoggedIn, (req, res) => {
 });
 
 // Route POST
-router.post('/create', isLoggedIn, async (req, res) => {
+router.post('/create', isLoggedIn,imgUploader.single('image'), async (req, res) => {
   req.post = new Post();
   req.post.title = req.body.title;
-  req.post.image = req.body.image;
+  console.log(req)
+  req.post.image = req.file.path;
   req.post.description = req.body.description;
   req.post.city = req.body.city;
   req.post.country = req.body.country;
@@ -26,7 +28,9 @@ router.post('/create', isLoggedIn, async (req, res) => {
     await req.post.save();
     res.redirect('/');
   } catch (error) {
+    console.log(error)
     res.redirect('/posts/createPost');
+    
   }
 });
 
@@ -97,5 +101,13 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
   await Post.findByIdAndDelete(req.params.id);
   res.redirect('/posts/all');
 });
+
+
+//Get Route to see the post detail
+
+router.get("/postDetail/:id", isLoggedIn, async (req,res)=>{
+  const post = await Post.findById(req.params.id).populate("user")
+  res.render("post/postDetail", {post})
+})
 
 module.exports = router;

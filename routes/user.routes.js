@@ -68,30 +68,42 @@ router.get('/profile/:id', isLoggedIn, async (req, res) => {
 
 router.get('/editProfile/:id', isLoggedIn, async (req, res) => {
   const user = await User.findById(req.params.id);
-  res.render('user/editProfile', { user, errorMessage: ''});
+  res.render('user/editProfile', { user, errorMessage: '' });
 });
 
 // Put route to editProfile page
 
-router.put('/editProfile/:id', isLoggedIn, imgUploader.single('profileImage'), async (req, res) => {
-  req.user = await User.findById(req.params.id);
-  req.user.username = req.body.username;
-  req.user.img = req.file.path;
-  req.user.country = req.body.country;
-  req.user.gender = req.body.gender;
-  try {
-    await req.user.save();
-    res.redirect(`/profile/${req.user.id}`);
-  } catch (error) {
-    console.log(error);
-    if (error.code === 11000) {
-      res.render('user/editProfile', {
-        user: req.user,
-        errorMessage: 'The username already exists',
-      });
+router.put(
+  '/editProfile/:id',
+  isLoggedIn,
+  imgUploader.single('profileImage'),
+  async (req, res) => {
+    req.user = await User.findById(req.params.id);
+    req.user.username = req.body.username;
+    if (!req.file) {
+      req.user.img = req.user.img;
+    } else {
+      console.log(req)
+      req.user.img = req.file.path;
+    }
+
+    req.user.country = req.body.country;
+    req.user.gender = req.body.gender;
+    try {
+      await req.user.save();
+
+      res.redirect(`/profile/${req.user.id}`);
+    } catch (error) {
+      console.log(error);
+      if (error.code === 11000) {
+        res.render('user/editProfile', {
+          user: req.user,
+          errorMessage: 'The username already exists',
+        });
+      }
     }
   }
-});
+);
 
 router.get('/logout', (req, res) => {
   req.session.destroy();

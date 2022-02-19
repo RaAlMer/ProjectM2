@@ -30,7 +30,7 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      maxAge: 1200000,
+      maxAge: 120000000,
     },
     store: store.create({
       mongoUrl: process.env.MONGODB_URL,
