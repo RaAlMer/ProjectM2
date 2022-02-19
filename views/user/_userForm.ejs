@@ -1,5 +1,5 @@
 <label for="username">Username:</label>
-<br>
+<br />
 <input
   type="text"
   name="username"
@@ -8,31 +8,34 @@
   value="<%= user.username %>"
 />
 <br />
-<!-- <label for="image">Image:*</label>
-<br>
-<input
-  type="text"
-  name="image"
-  required
-  placeholder="image"
-  value=""
-/> -->
+<br />
+<!-- <form action="/editProfile//profileImage" method="post" enctype="multipart/form-data"> -->
+  <input name="profileImage" type="file" />
+<!-- </form> -->
 <br />
 <label for="country">Country:</label>
-<br>
-<input type="text" name="country" placeholder="country" value="<%= user.country %>">
+<br />
+<input
+  type="text"
+  name="country"
+  placeholder="country"
+  value="<%= user.country %>"
+/>
 <br />
 <label for="gender">Gender:</label>
 
 <br />
-
-<input type="radio" id="male" name="gender" value="Male"  />
+<input type="radio" id="male" name="gender" value="Male" <%= user.gender ===
+'Male' ? 'checked' : '' %> />
 <label for="male">Male</label><br />
-<input type="radio" id="female" name="gender" value="Female" />
+<input type="radio" id="female" name="gender" value="Female" <%= user.gender ===
+'Female' ? 'checked' : '' %> />
 <label for="female">Female</label><br />
-<input type="radio" id="preferNotToTell" name="gender" value="Prefer not to tell" />
+<input type="radio" id="preferNotToTell" name="gender" value="Prefer not to
+tell" <%= user.gender === 'Prefer not to tell' ? 'checked' : '' %> />
 <label for="preferNotToTell">Prefer not to tell</label><br />
-<input type="radio" id="notSpecified" name="gender" value="Not specified" checked/>
+<input type="radio" id="notSpecified" name="gender" value="Not specified" <%=
+user.gender === 'Not specified' ? 'checked' : '' %> />
 <label for="notSpecified">Not specified</label>
 
 <br />

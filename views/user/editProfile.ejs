@@ -1,4 +1,6 @@
-<form action="/editProfile/<%= user.id %>?_method=PUT" method="post">
-    <%-  include("_userForm") %> 
+<form action="/editProfile/<%= user.id %>?_method=PUT" method="post" enctype="multipart/form-data">
+  <%- include("_userForm") %> <% if (errorMessage) { %>
+  <p class="error"><%= errorMessage %></p>
+  <% } %>
 </form>
-<a href="/profile/<%= user.id %> ">Back to Profile</a>
+<a href="/profile/<%= currentUser._id %>">Back to Profile</a>

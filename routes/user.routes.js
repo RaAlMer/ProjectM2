@@ -4,7 +4,10 @@ const User = require('../models/user.model');
 const { isLoggedIn } = require('../middlewares/guard');
 
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 const saltRounds = 12;
+
+const imgUploader = require('../cloudinary.config');
 
 // GET route to display the signup form
 router.get('/signup', (req, res, next) => res.render('user/signup'));
@@ -24,7 +27,6 @@ router.post('/signup', async (req, res, next) => {
       await user.save();
       res.redirect('/');
     } catch (error) {
-      console.log(error);
       res.redirect('/signup');
     }
   } else {
@@ -66,23 +68,28 @@ router.get('/profile/:id', isLoggedIn, async (req, res) => {
 
 router.get('/editProfile/:id', isLoggedIn, async (req, res) => {
   const user = await User.findById(req.params.id);
-  res.render('user/editProfile', { user });
+  res.render('user/editProfile', { user, errorMessage: ''});
 });
 
 // Put route to editProfile page
 
-router.put('/editProfile/:id', isLoggedIn, async (req, res) => {
+router.put('/editProfile/:id', isLoggedIn, imgUploader.single('profileImage'), async (req, res) => {
   req.user = await User.findById(req.params.id);
   req.user.username = req.body.username;
-  req.user.img = req.body.img;
+  req.user.img = req.file.path;
   req.user.country = req.body.country;
   req.user.gender = req.body.gender;
   try {
     await req.user.save();
-
     res.redirect(`/profile/${req.user.id}`);
   } catch (error) {
-    res.redirect(`/editProfile/${req.user.id}`);
+    console.log(error);
+    if (error.code === 11000) {
+      res.render('user/editProfile', {
+        user: req.user,
+        errorMessage: 'The username already exists',
+      });
+    }
   }
 });
 
