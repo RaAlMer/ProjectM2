@@ -1,26 +1,33 @@
-<div id="form">
-    <h2>Signup</h2>
-    <form action="/signup" method="POST">
-   
-      <label> Username
-        <input type="text" name="username" placeholder="Introduce your username" />
-      </label>
+<link rel="stylesheet" href="../css/signUp.css" />
 
-      <label> Email
-        <input type="email" name="email" placeholder="Introduce your email" />
-      </label>
-   
-      <label> Password
-        <input type="password" name="password" placeholder="Introduce your password" />
-      </label>
+<div class="signUpMenu" id="form">
+  <h2>Signup</h2>
 
-      <label> Repeat Password
-        <input type="password" name="repeatPassword" placeholder="Repeat your password" />
-      </label>
-   
-      <button type="submit" class="btn btn-primary">Create account</button>
+  <form action="/signup" method="POST">
+    <label> Username </label>
+    <input type="text" name="username" placeholder="Introduce your username" />
 
-    </form>
+    <label> Email </label>
+    <input type="email" name="email" placeholder="Introduce your email" />
+
+    <label> Password </label>
+    <input
+      type="password"
+      name="password"
+      placeholder="Introduce your password"
+    />
+
+    <label> Repeat Password </label>
+    <input
+      type="password"
+      name="repeatPassword"
+      placeholder="Repeat your password"
+    />
+
+    <button class="btnSubmit" type="submit">Create account</button>
+  </form>
+  <p>Already have an account? <a href="/login">Click here</a></p>
+  <p><a href="/">Back to home page</a></p>
 </div>
 
-<a href="/">Back to home page</a>
+

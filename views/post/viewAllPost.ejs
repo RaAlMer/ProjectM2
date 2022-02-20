@@ -1,10 +1,11 @@
+<link rel="stylesheet" href="../css/viewAll.css">
 <ul>
   <% posts.forEach(post => { %>
   <li>
     <a href="/posts/postDetail/<%= post.id %> ">
       <div>
         <h2><%= post.title %></h2>
-        <img src="<%= post.image %>" alt="Image" />
+        <img class="images" src="<%= post.image %>" alt="Image" />
         <br />
         <label for="description">Description:</label>
         <p><%= post.description %></p>
@@ -19,7 +20,6 @@
     <a href="/posts/upvote/<%= post.id %> "
       ><i class="fa fa-thumbs-up" aria-hidden="true"></i
     ></a>
-
     <a href="/posts/downvote/<%= post.id %> "
       ><i class="fa fa-thumbs-down" aria-hidden="true"></i
     ></a>

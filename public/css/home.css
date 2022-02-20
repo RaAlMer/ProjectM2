@@ -1,0 +1,26 @@
+.navBar{
+    margin-top: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    
+    
+}
+
+.homeBtns{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 120px;
+    height: 32px;
+    text-decoration: none;
+    border: 3px rgb(214, 142, 9) solid;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: 300;
+    color: rgb(214, 142, 9);
+}
+
+.homeBtns:hover{
+    border: 3px black solid;
+    color: black;
+}

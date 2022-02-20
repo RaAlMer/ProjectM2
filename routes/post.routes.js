@@ -48,6 +48,7 @@ router.get('/all', async (req, res) => {
 
 router.get('/edit/:id', isLoggedIn, async (req, res) => {
   const post = await Post.findById(req.params.id);
+
   res.render('post/editPost', { post });
 });
 
