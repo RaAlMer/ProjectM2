@@ -1,18 +1,4 @@
-<link rel="stylesheet" href="../css/home.css">
-<nav class="navBar">
-  <a class="homeBtns" href="/posts/all">View all posts</a>
-  <br />
-  <% if (!currentUser) { %>
-  <a class="homeBtns" href="/signup"> Sign Up page</a>
-  <br />
-  <a class="homeBtns" href="/login"> Log in page</a>
-  <% } else{ %>
-  <a class="homeBtns" href="/posts/create">Create post</a>
-  <br />
-  <a class="homeBtns" href="/profile/<%= currentUser._id %> ">My profile</a>
-  <br />
-  <a class="homeBtns" href="/logout">Log Out</a>
-  <% } %>
-</nav>
+
+
 
 <h1>home page</h1>

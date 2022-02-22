@@ -60,4 +60,8 @@ app.use('/posts', postRouter);
 const commentRouter = require('./routes/comment.routes');
 app.use('/comment', commentRouter);
 
+
+// ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
+require('./error-handling')(app);
+
 app.listen(process.env.PORT);

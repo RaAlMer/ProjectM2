@@ -20,10 +20,11 @@
     <a href="/posts/upvote/<%= post.id %> "
       ><i class="fa fa-thumbs-up" aria-hidden="true"></i
     ></a>
+    <span><%= post.upVote.length %></span>
     <a href="/posts/downvote/<%= post.id %> "
       ><i class="fa fa-thumbs-down" aria-hidden="true"></i
     ></a>
-    <span><%= post.upVote.length - post.downVote.length %></span>
+    <span><%= post.downVote.length %></span>
     <br />
     <% if (currentUser) { %> <% if (post.user.toString() === currentUser._id) {
     %>

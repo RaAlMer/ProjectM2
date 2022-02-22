@@ -76,28 +76,33 @@ router.put('/edit/:id', isLoggedIn, async (req, res) => {
 
 router.get('/upvote/:id', isLoggedIn, async (req, res) => {
   const post = await Post.findById(req.params.id);
-  if (post.downVote.includes(req.session.currentUser._id)) {
-    post.downVote.splice(req.session.currentUser._id, 1);
-  }
+
   if (!post.upVote.includes(req.session.currentUser._id)) {
     post.upVote.push(req.session.currentUser._id);
+    if (post.downVote.includes(req.session.currentUser._id)) {
+      post.downVote.splice(
+        post.downVote.indexOf(req.session.currentUser._id),
+        1
+      );
+    }
   }
+
   post.save();
-  res.redirect('/posts/all');
+  res.redirect(req.get('referer'));
 });
 
 //Route for downVote
 
 router.get('/downvote/:id', isLoggedIn, async (req, res) => {
   const post = await Post.findById(req.params.id);
-  if (post.upVote.includes(req.session.currentUser._id)) {
-    post.upVote.splice(req.session.currentUser._id, 1);
-  }
   if (!post.downVote.includes(req.session.currentUser._id)) {
     post.downVote.push(req.session.currentUser._id);
+    if (post.upVote.includes(req.session.currentUser._id)) {
+      post.upVote.splice(post.upVote.indexOf(req.session.currentUser._id), 1);
+    }
   }
   post.save();
-  res.redirect('/posts/all');
+  res.redirect(req.get('referer'));
 });
 
 // DELETE route delete post

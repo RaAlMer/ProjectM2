@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="../../css/postDetail.css">
+<link rel="stylesheet" href="../../css/postDetail.css" />
+<link rel="stylesheet" href="../../css/layout.css" />
 <div>
   <h2><%= post.title %></h2>
   <small>
@@ -29,11 +30,11 @@
 <a href="/posts/upvote/<%= post.id %> "
   ><i class="fa fa-thumbs-up" aria-hidden="true"></i
 ></a>
-
+<span><%= post.upVote.length %></span>
 <a href="/posts/downvote/<%= post.id %> "
   ><i class="fa fa-thumbs-down" aria-hidden="true"></i
 ></a>
-<span><%= post.upVote.length - post.downVote.length %></span>
+<span><%= post.downVote.length %></span>
 <br />
 <% if (currentUser) { %> <% if (post.user.toString() === currentUser._id) { %>
 <a href="/posts/edit/<%= post.id %>">Edit post</a>
@@ -49,11 +50,10 @@
   <li>
     <%= comment.title %>
     <br />
-    <%- console.log(comment.image) %> 
-    <% comment.image.forEach(img => { %>
-      <img class="images" src="<%= img %>" alt="Image" />
+    <%- console.log(comment.image) %> <% comment.image.forEach(img => { %>
+    <img class="images" src="<%= img %>" alt="Image" />
     <% }) %>
-    <br>
+    <br />
     <%= comment.description %>
     <br />
     <small
@@ -64,11 +64,16 @@
   <% }) %>
 </ul>
 
-<form action="/comment/<%= post.id %> " method="post" enctype="multipart/form-data">
+<form
+  action="/comment/<%= post.id %> "
+  method="post"
+  enctype="multipart/form-data"
+>
   <input type="text" name="title" placeholder="title" />
   <br />
-  <input name="comImage" type="file" multiple/>
-  <br>
+  <input name="comImage" type="file" multiple />
+  <p>Max: 3 images</p>
+
   <textarea name="description" cols="30" rows="10"></textarea>
   <br />
   <button type="submit">Comment</button>
