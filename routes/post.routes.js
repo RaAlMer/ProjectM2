@@ -19,7 +19,6 @@ router.post(
   async (req, res) => {
     req.post = new Post();
     req.post.title = req.body.title;
-    console.log(req);
     req.post.image = req.file.path;
     req.post.description = req.body.description;
     req.post.city = req.body.city;
