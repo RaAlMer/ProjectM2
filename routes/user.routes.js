@@ -9,8 +9,13 @@ const saltRounds = 12;
 
 const imgUploader = require('../cloudinary.config');
 
-// GET route to display the signup form
-router.get('/signup', (req, res, next) => res.render('user/signup'));
+// GET Sign-up/Log-in route
+router.get('/sign-log', (req, res) => {
+  res.render('user/logInSignUp');
+});
+
+/* // GET route to display the signup form
+router.get('/signup', (req, res, next) => res.render('user/signup')); */
 
 // POST route to create account
 router.post('/signup', async (req, res, next) => {
@@ -34,11 +39,11 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-// GET route to log in page
+/* // GET route to log in page
 
 router.get('/login', (req, res) => {
   res.render('user/login');
-});
+}); */
 
 // Post route to log in page
 
@@ -83,10 +88,8 @@ router.put(
     if (!req.file) {
       req.user.img = req.user.img;
     } else {
-      console.log(req)
       req.user.img = req.file.path;
     }
-
     req.user.country = req.body.country;
     req.user.gender = req.body.gender;
     try {
@@ -94,7 +97,6 @@ router.put(
 
       res.redirect(`/profile/${req.user.id}`);
     } catch (error) {
-      console.log(error);
       if (error.code === 11000) {
         res.render('user/editProfile', {
           user: req.user,

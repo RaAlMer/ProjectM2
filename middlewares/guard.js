@@ -3,7 +3,7 @@
 // checking if user is logged in
 function isLoggedIn(req, res, next) {
     if (!req.session.currentUser) {
-      res.redirect("/user/login");
+      res.redirect("/login");
     } else {
       next();
     }
