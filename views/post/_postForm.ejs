@@ -8,9 +8,22 @@
   value="<%= post.title %>"
 />
 <br />
+
+<input type="radio" id="open" name="status" value="Open" <%= post.status ===
+'Open' ? 'checked' : '' %> />
+<label for="open">Open</label><br />
+<input type="radio" id="inProcess" name="status" value="In process" <%= post.status ===
+'In process' ? 'checked' : '' %> />
+<label for="inProcess">In process</label><br />
+<input type="radio" id="closed" name="status" value="Closed" <%= post.status === 'Closed' ? 'checked' : '' %> />
+<label for="closed">Closed</label><br />
+
+
+<br>
+
 <label for="image">Image:*</label>
 <br>
-<input name="image" type="file" />
+<input name="image" type="file"  />
 <br />
 <label for="description">Description:*</label>
 <br>

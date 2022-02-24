@@ -47,7 +47,13 @@ const postSchema = new Schema(
         type: [SchemaTypes.ObjectId],
         ref:"Comment",
         default:[],
-    }
+    },
+    status: {
+      type: String,
+      enum: ['Open', 'In process', 'Closed'],
+      default: "Open"
+    },
+
   },
   {
     timestamps: true,

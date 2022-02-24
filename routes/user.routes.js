@@ -55,10 +55,10 @@ router.post('/login', async (req, res) => {
       req.session.currentUser = user;
       res.redirect(`/profile/${user.id}`);
     } else {
-      res.redirect('/login');
+      res.redirect('/sign-log');
     }
   } catch (error) {
-    res.redirect('/login');
+    res.redirect('/sign-log');
   }
 });
 
@@ -66,6 +66,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/profile/:id', isLoggedIn, async (req, res) => {
   const user = await User.findById(req.params.id);
+  
   res.render('user/myprofile', { user });
 });
 

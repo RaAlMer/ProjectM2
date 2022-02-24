@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="../../css/layout.css" />
 <div>
   <h2><%= post.title %></h2>
+  <h4><%= post.status %> </h4>
   <small>
     Created by:
     <a href="/profile/<%= post.user._id %> "><%= post.user.username %></a>

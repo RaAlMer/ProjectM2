@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, SchemaTypes } = require('mongoose');
 
 const userSchema = new Schema(
   {
@@ -21,7 +21,6 @@ const userSchema = new Schema(
     },
     score: {
       type: Number,
-      min: 0,
       default: 0,
     },
     img: {
@@ -37,6 +36,16 @@ const userSchema = new Schema(
       type: String,
       default: 'Not specified',
       enum: ['Male', 'Female', 'Prefer not to tell', 'Not specified'],
+    },
+    comments: {
+      type: [SchemaTypes.ObjectId],
+      ref: 'Comment',
+      default: [],
+    },
+    posts: {
+      type: [SchemaTypes.ObjectId],
+      ref: 'Post',
+      default: [],
     },
   },
   {

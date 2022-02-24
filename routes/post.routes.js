@@ -3,6 +3,7 @@ const router = new Router();
 const Post = require('../models/post.model');
 const { isLoggedIn } = require('../middlewares/guard');
 const imgUploader = require('../cloudinary.config');
+const User = require('../models/user.model');
 
 // Route to create Post
 
@@ -28,6 +29,10 @@ router.post(
     req.post.latitude = req.body.latitude;
     req.post.user = req.session.currentUser._id;
     try {
+      const user = await User.findById(req.session.currentUser._id)
+      user.posts.push(req.post.id);
+      user.score += 10
+      await user.save()
       await req.post.save();
       res.redirect('/');
     } catch (error) {
@@ -53,10 +58,13 @@ router.get('/edit/:id', isLoggedIn, async (req, res) => {
 
 // Put route to edit the post
 
-router.put('/edit/:id', isLoggedIn, async (req, res) => {
+router.put('/edit/:id', isLoggedIn,imgUploader.single('image'), async (req, res) => {
   req.post = await Post.findById(req.params.id);
   req.post.title = req.body.title;
-  req.post.image = req.body.image;
+  req.post.status = req.body.status;
+  if(req.file){
+  req.post.image = req.file.path;
+  }
   req.post.description = req.body.description;
   req.post.city = req.body.city;
   req.post.country = req.body.country;
@@ -86,7 +94,9 @@ router.get('/upvote/:id', isLoggedIn, async (req, res) => {
       );
     }
   }
-
+  const user = await User.findById(post.user) 
+  user.score +=5
+  user.save();
   post.save();
   res.redirect(req.get('referer'));
 });
@@ -101,6 +111,9 @@ router.get('/downvote/:id', isLoggedIn, async (req, res) => {
       post.upVote.splice(post.upVote.indexOf(req.session.currentUser._id), 1);
     }
   }
+  const user = await User.findById(post.user) 
+  user.score -=5
+  user.save();
   post.save();
   res.redirect(req.get('referer'));
 });
@@ -108,6 +121,9 @@ router.get('/downvote/:id', isLoggedIn, async (req, res) => {
 // DELETE route delete post
 router.delete('/:id', isLoggedIn, async (req, res) => {
   await Post.findByIdAndDelete(req.params.id);
+  const user = await User.findById(req.session.currentUser._id)
+  user.score -= 10
+  await user.save()
   res.redirect('/posts/all');
 });
 
