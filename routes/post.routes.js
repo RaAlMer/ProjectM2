@@ -16,11 +16,15 @@ router.get('/create', isLoggedIn, (req, res) => {
 router.post(
   '/create',
   isLoggedIn,
-  imgUploader.single('image'),
+  imgUploader.array('image', 3),
   async (req, res) => {
+    let preImage = [];
     req.post = new Post();
     req.post.title = req.body.title;
-    req.post.image = req.file.path;
+    req.files.forEach(img => {
+      preImage.push(img.path);
+    });
+    req.post.image = preImage;
     req.post.description = req.body.description;
     req.post.city = req.body.city;
     req.post.country = req.body.country;

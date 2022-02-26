@@ -21,7 +21,6 @@ const postSchema = new Schema(
       min: -180,
       max: 180,
     },
-
     city: {
       type: String,
       required: true,

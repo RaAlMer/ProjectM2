@@ -5,7 +5,7 @@
     <a href="/posts/postDetail/<%= post.id %> ">
       <div>
         <h2><%= post.title %></h2>
-        <img class="images" src="<%= post.image %>" alt="Image" />
+        <img class="images" src="<%= post.image[0] %>" alt="Image" />
         <br />
         <label for="description">Description:</label>
         <p><%= post.description %></p>

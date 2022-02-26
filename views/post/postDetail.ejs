@@ -8,8 +8,9 @@
     <a href="/profile/<%= post.user._id %> "><%= post.user.username %></a>
   </small>
   <br />
-
-  <img src="<%= post.image %>" alt="Image" />
+  <% post.image.forEach(img => { %>
+    <img class="images" src="<%= img %>" alt="Image" />
+  <% }) %>
   <br />
   <br />
   <label for="description">Description:</label>
@@ -50,7 +51,7 @@
   <li>
     <%= comment.title %>
     <br />
-    <%- console.log(comment.image) %> <% comment.image.forEach(img => { %>
+    <% comment.image.forEach(img => { %>
     <img class="images" src="<%= img %>" alt="Image" />
     <% }) %>
     <br />
