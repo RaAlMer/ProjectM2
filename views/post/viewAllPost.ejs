@@ -1,42 +1,55 @@
 <link rel="stylesheet" href="../css/viewAll.css">
-<ul>
-  <% posts.forEach(post => { %>
-  <li>
-    <a href="/posts/postDetail/<%= post.id %> ">
-      <div>
-        <h2><%= post.title %></h2>
-        <img class="images" src="<%= post.image[0] %>" alt="Image" />
-        <br />
-        <label for="description">Description:</label>
-        <p><%= post.description %></p>
-        <br />
-        <label for="location">Location:</label>
-        <p><%= post.city %>, <%= post.country %></p>
-        <br />
-        <label for="level">Level:</label>
-        <p><%= post.level%></p>
-      </div> 
-    </a>
-    <a href="/posts/upvote/<%= post.id %> "
-      ><i class="fa fa-thumbs-up" aria-hidden="true"></i
-    ></a>
-    <span><%= post.upVote.length %></span>
-    <a href="/posts/downvote/<%= post.id %> "
-      ><i class="fa fa-thumbs-down" aria-hidden="true"></i
-    ></a>
-    <span><%= post.downVote.length %></span>
+<div class="container">
+  <ul>
+    <% posts.forEach(post => { %>
+    <li>
+      <a href="/posts/postDetail/<%= post.id %> ">
+        <div class="title">
+          <h2><%= post.title %></h2>
+          <img class="images" src="<%= post.image[0] %>" alt="Image" />
+        </div>
+        <div class="description">
+          <label for="description">Description:</label>
+          <p><%= post.description %></p>
+        </div>
+        <div class="loclev">
+          <label for="location">Location:</label>
+          <p><%= post.city %>, <%= post.country %></p>
+          <label for="level">Level:</label>
+          <p><%= post.level%></p>
+        </div> 
+      </a>
+      <div class="editing">
+        <div class="editDelBtns">
+          <% if (currentUser) { %> 
+            <% if (post.user.toString() === currentUser._id) { %>
+            <a href="/posts/edit/<%= post.id %>">Edit post</a>
+            <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
+              <button type="submit">Delete post</button>
+            </form>
+            <% } %> 
+          <% } %>
+        </div>
+        <div class="votes">
+          <a href="/posts/upvote/<%= post.id %> "
+            ><i class="fa fa-thumbs-up" aria-hidden="true"></i
+          ></a>
+          <span><%= post.upVote.length %></span>
+          <a href="/posts/downvote/<%= post.id %> "
+            ><i class="fa fa-thumbs-down" aria-hidden="true"></i
+          ></a>
+          <span><%= post.downVote.length %></span>
+        </div>
+      </div>
+      <br />
+    </li>
+    <% }) %> 
+  </ul>
+</div>
+<div>
+  <% if (currentUser) { %>
+    <a href="/posts/create">Create post</a>
+    <% } %>
     <br />
-    <% if (currentUser) { %> <% if (post.user.toString() === currentUser._id) {
-    %>
-    <a href="/posts/edit/<%= post.id %>">Edit post</a>
-    <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
-      <button type="submit">Delete post</button>
-    </form>
-    <% } %> <% } %>
-  </li>
-  <% }) %> <% if (currentUser) { %>
-  <a href="/posts/create">Create post</a>
-  <% } %>
-  <br />
-  <a href="/">Back home</a>
-</ul>
+    <a href="/">Back home</a>
+</div>

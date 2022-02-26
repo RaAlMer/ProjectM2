@@ -17,17 +17,17 @@
     </style>
   </head>
   <body>
+    <a class="logo" href="/"><img src="../images/geogreen.png" alt="Logo"></a>
     <nav class="navBar">
       <a class="homeBtns" href="/posts/all">View all posts</a>
       <br />
       <% if (!currentUser) { %>
-      <!-- <a class="homeBtns" href="/signup"> Sign Up page</a>
-      <br />
-      <a class="homeBtns" href="/login"> Log in page</a> -->
       <a class="homeBtns" href="/sign-log">Sign Up / Log In page</a>
       <% } else{ %>
       <a class="homeBtns" href="/posts/create">Create post</a>
       <br />
+      <a class="homeBtns" href="/map">Map</a>
+      <br>
       <a class="homeBtns" href="/profile/<%= currentUser._id %> ">My profile</a>
       <br />
       <a class="homeBtns" href="/logout">Log Out</a>
