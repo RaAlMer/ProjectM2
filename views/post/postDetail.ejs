@@ -23,8 +23,7 @@
   <br />
   <label for="coords">Latitude and Longitude:</label>
   <% if (post.latitude && post.longitude) { %>
-  <p><%= post.latitude %></p>
-  <p><%= post.longitude %></p>
+<a href="/map/<%= post.id %>">See Coordinates</a>
   <% } %>
 </div>
 

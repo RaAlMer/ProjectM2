@@ -36,7 +36,6 @@ router.post(
       await req.post.save();
       res.redirect('/');
     } catch (error) {
-      console.log(error);
       res.redirect('/posts/createPost');
     }
   }

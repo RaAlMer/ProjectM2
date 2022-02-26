@@ -29,3 +29,14 @@ togglePassword3.addEventListener("click", function (e) {
   // toggle the eye slash icon
   this.classList.toggle("fa-eye-slash");
 });
+
+let check = function() {
+  if (document.getElementById('sigpass').value ==
+    document.getElementById('repeatpass').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'Passwords matching';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'Passwords not matching';
+  }
+}

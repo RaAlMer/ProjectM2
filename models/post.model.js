@@ -11,8 +11,17 @@ const postSchema = new Schema(
       required: true,
     },
     description: { type: String, required: true },
-    longitude: Number,
-    latitude: Number,
+    latitude: {
+      type: Number,
+      min: -90,
+      max: 90,
+    },
+    longitude: {
+      type: Number,
+      min: -180,
+      max: 180,
+    },
+
     city: {
       type: String,
       required: true,
@@ -29,31 +38,30 @@ const postSchema = new Schema(
       type: [SchemaTypes.ObjectId],
       ref: 'LocalAuthorities',
     },
-    user:{
-        type: SchemaTypes.ObjectId,
-        ref:"User",
+    user: {
+      type: SchemaTypes.ObjectId,
+      ref: 'User',
     },
-    upVote:{
-        type: [SchemaTypes.ObjectId],
-        ref:"User",
-        default:[],
+    upVote: {
+      type: [SchemaTypes.ObjectId],
+      ref: 'User',
+      default: [],
     },
-    downVote:{
-        type: [SchemaTypes.ObjectId],
-        ref:"User",
-        default:[],
+    downVote: {
+      type: [SchemaTypes.ObjectId],
+      ref: 'User',
+      default: [],
     },
-    comments:{
-        type: [SchemaTypes.ObjectId],
-        ref:"Comment",
-        default:[],
+    comments: {
+      type: [SchemaTypes.ObjectId],
+      ref: 'Comment',
+      default: [],
     },
     status: {
       type: String,
       enum: ['Open', 'In process', 'Closed'],
-      default: "Open"
+      default: 'Open',
     },
-
   },
   {
     timestamps: true,
