@@ -1,15 +1,18 @@
-<h2>Profile page</h2>
+<link rel="stylesheet" href="../css/myprofile.css" />
 
-<br />
 
-<img src="<%= user.img %> " alt="avatar" />
-<h3>User: <%= user.username %></h3>
-<h3>Gender: <%= user.gender %> </h3>
-<h3>Email: <%= user.email %></h3>
-<p>Country: <%= user.country %> </p>
-<h4>Score: <%= user.score %> </h4>
+<h2 id="pageTitle">Profile page</h2>
+<div class="mainContainer">
+  <div class="profileImage">
+    <img src="<%= user.img %> " alt="avatar" />
 
-<br>
-<a href="/editProfile/<%= user.id %>">Edit Profile</a>
-<br>
-<a href="/">Back Home</a>
+    <a id="editBtn" href="/editProfile/<%= user.id %>">Edit Profile</a>
+  </div>
+  <div class="userInfo">
+    <h4>User: <%= user.username %></h4>
+    <h4>Gender: <%= user.gender %></h4>
+    <h4>Email: <%= user.email %></h4>
+    <h4>Country: <%= user.country %></h4>
+    <h4>Score: <%= user.score %></h4>
+  </div>
+</div>

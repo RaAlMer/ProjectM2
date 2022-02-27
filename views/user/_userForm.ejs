@@ -1,42 +1,50 @@
-<label for="username">Username:</label>
-<br />
-<input
-  type="text"
-  name="username"
-  required
-  placeholder="username"
-  value="<%= user.username %>"
-/>
-<br />
-<br />
+<link rel="stylesheet" href="../css/editProfile.css" />
+<div class="mainContainerEditProfile">
+  <label for="username">Username:</label>
+  <br />
+  <input
+    type="text"
+    name="username"
+    required
+    placeholder="username"
+    value="<%= user.username %>"
+  />
+  <br />
+  <br />
 
   <input name="profileImage" type="file" />
 
-<br />
-<label for="country">Country:</label>
-<br />
-<input
-  type="text"
-  name="country"
-  placeholder="country"
-  value="<%= user.country %>"
-/>
-<br />
-<label for="gender">Gender:</label>
+  <br />
+  <div class="country">
+    <label for="country">Country:</label>
+    <br />
+    <input
+      type="text"
+      name="country"
+      placeholder="country"
+      value="<%= user.country %>"
+    />
+  </div>
 
-<br />
-<input type="radio" id="male" name="gender" value="Male" <%= user.gender ===
-'Male' ? 'checked' : '' %> />
-<label for="male">Male</label><br />
-<input type="radio" id="female" name="gender" value="Female" <%= user.gender ===
-'Female' ? 'checked' : '' %> />
-<label for="female">Female</label><br />
-<input type="radio" id="preferNotToTell" name="gender" value="Prefer not to
-tell" <%= user.gender === 'Prefer not to tell' ? 'checked' : '' %> />
-<label for="preferNotToTell">Prefer not to tell</label><br />
-<input type="radio" id="notSpecified" name="gender" value="Not specified" <%=
-user.gender === 'Not specified' ? 'checked' : '' %> />
-<label for="notSpecified">Not specified</label>
+  <br />
+  <div class="gender">
+    <label for="gender">Gender:</label>
 
-<br />
-<button type="submit">submit</button>
+    <br />
+    <input type="radio" id="male" name="gender" value="Male" <%= user.gender ===
+    'Male' ? 'checked' : '' %> />
+    <label for="male">Male</label><br />
+    <input type="radio" id="female" name="gender" value="Female" <%= user.gender
+    === 'Female' ? 'checked' : '' %> />
+    <label for="female">Female</label><br />
+    <input type="radio" id="preferNotToTell" name="gender" value="Prefer not to
+    tell" <%= user.gender === 'Prefer not to tell' ? 'checked' : '' %> />
+    <label for="preferNotToTell">Prefer not to tell</label><br />
+    <input type="radio" id="notSpecified" name="gender" value="Not specified"
+    <%= user.gender === 'Not specified' ? 'checked' : '' %> />
+    <label for="notSpecified">Not specified</label>
+  </div>
+
+  <br />
+  <button class="saveBtn" type="submit">Save changes</button>
+</div>

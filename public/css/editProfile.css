@@ -1,0 +1,20 @@
+* {
+  background-color: #67ad21;
+}
+
+.mainContainerEditProfile {
+  padding-left: 50px;
+  padding-top: 50px;
+}
+
+.country {
+  margin-top: 20px;
+}
+
+.gender {
+  margin-top: 20px;
+}
+
+.saveBtn {
+  margin-top: 20px;
+}

@@ -22,7 +22,10 @@ html {
 .menu {
   display: flex;
   gap: 30px;
-  
+}
+
+.menuBar:hover {
+  color: black;
 }
 
 .menu > a {
@@ -62,18 +65,19 @@ h4 {
   padding-bottom: 20px;
 }
 
-.theTeam{
+.theTeam {
   padding-top: 30px;
   display: flex;
- gap: 300px;
+  gap: 300px;
 }
 
-.belchior, .raul{
+.belchior,
+.raul {
   display: flex;
   gap: 50px;
 }
 
-.imageTeamMember{
+.imageTeamMember {
   width: 300px;
 }
 
@@ -84,7 +88,7 @@ h4 {
     both;
 }
 
-.youtube{
+.youtube {
   margin-top: 30px;
 }
 

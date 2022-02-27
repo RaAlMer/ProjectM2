@@ -1,0 +1,48 @@
+* {
+    background-color: #67ad21;
+    color: white;
+  }
+
+
+#pageTitle{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}  
+
+.mainContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.profileImage{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 30px;
+}
+
+
+#editBtn{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 200px;
+    height: 32px;
+    text-decoration: none;
+    border: 3px rgb(226, 213, 31) solid;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(226, 213, 31);
+    background-color: #67ad21;
+}
+
+#editBtn:hover{
+    border: 3px black solid;
+    color: black;
+}
+
