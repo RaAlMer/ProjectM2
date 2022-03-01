@@ -38,7 +38,7 @@ router.post(
       user.score += 10
       await user.save()
       await req.post.save();
-      res.redirect('/');
+      res.redirect('/posts/all');
     } catch (error) {
       res.redirect('/posts/createPost');
     }

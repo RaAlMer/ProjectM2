@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="../../css/postDetail.css" />
-<link rel="stylesheet" href="../../css/layout.css" />
-<div>
+<link rel="stylesheet" href="/css/postDetail.css" />
+<link rel="stylesheet" href="/css/layout.css" />
+<div class="thePost">
   <h2><%= post.title %></h2>
-  <h4><%= post.status %> </h4>
+  <h4>Status: <%= post.status %> </h4>
   <small>
     Created by:
     <a href="/profile/<%= post.user._id %> "><%= post.user.username %></a>
@@ -14,7 +14,7 @@
   <br />
   <br />
   <label for="description">Description:</label>
-  <p><%= post.description %></p>
+  <p class="theDescription"><%= post.description %></p>
   <br />
   <label for="level">Level:</label>
   <p><%= post.level%></p>
@@ -26,8 +26,8 @@
   <% if (post.latitude && post.longitude) { %>
 <a href="/map/<%= post.id %>">See Coordinates</a>
   <% } %>
-</div>
 
+<br>
 <a href="/posts/upvote/<%= post.id %> "
   ><i class="fa fa-thumbs-up" aria-hidden="true"></i
 ></a>
@@ -36,15 +36,15 @@
   ><i class="fa fa-thumbs-down" aria-hidden="true"></i
 ></a>
 <span><%= post.downVote.length %></span>
-<br />
+</div>
+
 <% if (currentUser) { %> <% if (post.user.toString() === currentUser._id) { %>
 <a href="/posts/edit/<%= post.id %>">Edit post</a>
 <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
   <button type="submit">Delete post</button>
 </form>
 <% } %> <% } %>
-<br />
-<br />
+<div class="comments">
 <h4>Comments:</h4>
 <ul>
   <% post.comments.forEach((comment)=>{%>
@@ -64,20 +64,24 @@
   </li>
   <% }) %>
 </ul>
+</div>
 
-<form
+<div class="addComments">
+  <form
   action="/comment/<%= post.id %> "
   method="post"
   enctype="multipart/form-data"
 >
-  <input type="text" name="title" placeholder="title" />
+  <input type="text" name="title" placeholder="title" style="color: white;" />
   <br />
   <input name="comImage" type="file" multiple />
   <p>Max: 3 images</p>
 
-  <textarea name="description" cols="30" rows="10"></textarea>
+  <textarea name="description" cols="30" rows="10" style="color: white;"></textarea>
   <br />
-  <button type="submit">Comment</button>
+  <button id="submitBtn" type="submit">Comment</button>
 </form>
+</div>
+
 
 <a href="/posts/all">Back All Posts</a>
