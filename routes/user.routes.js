@@ -11,7 +11,7 @@ const imgUploader = require('../cloudinary.config');
 
 // GET Sign-up/Log-in route
 router.get('/sign-log', (req, res) => {
-  res.render('user/logInSignUp');
+  res.render('user/logInSignUp', {message: ""});
 });
 
 /* // GET route to display the signup form
@@ -66,7 +66,6 @@ router.post('/login', async (req, res) => {
 
 router.get('/profile/:id', isLoggedIn, async (req, res) => {
   const user = await User.findById(req.params.id);
-
   res.render('user/myprofile', { user });
 });
 
@@ -74,7 +73,7 @@ router.get('/profile/:id', isLoggedIn, async (req, res) => {
 
 router.get('/editProfile/:id', isLoggedIn, async (req, res) => {
   const user = await User.findById(req.params.id);
-  res.render('user/editProfile', { user, errorMessage: '' });
+  res.render('user/editProfile', { user });
 });
 
 // Put route to editProfile page
