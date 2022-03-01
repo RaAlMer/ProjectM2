@@ -1,4 +1,8 @@
-<form action="/posts/create" method="post" enctype="multipart/form-data">
-    <%-  include("_postForm") %> 
-</form>
-<a href="/">Back home</a>
+<link rel="stylesheet" href="../../css/createPost.css" />
+<div class="container">
+  <form action="/posts/create" method="post" enctype="multipart/form-data">
+    <%- include("_postForm") %>
+  </form>
+  <br />
+  <a href="/" class="home">Back home</a>
+</div>

@@ -1,91 +1,98 @@
-<label for="title">Title:*</label>
+<div class="title">
+  <label for="title">Title:*</label>
+  <br />
+  <input
+    type="text"
+    name="title"
+    required
+    placeholder="Title of the post"
+    value="<%= post.title %>"
+  />
+</div>
 <br />
-<input
-  type="text"
-  name="title"
-  required
-  placeholder="title"
-  value="<%= post.title %>"
-/>
+<div class="status">
+  <input type="radio" id="open" name="status" value="Open" <%= post.status ===
+  'Open' ? 'checked' : '' %> />
+  <label for="open">Open</label><br />
+  <input type="radio" id="inProcess" name="status" value="In process" <%=
+  post.status === 'In process' ? 'checked' : '' %> />
+  <label for="inProcess">In process</label><br />
+  <input type="radio" id="closed" name="status" value="Closed" <%= post.status
+  === 'Closed' ? 'checked' : '' %> />
+  <label for="closed">Closed</label>
+</div>
 <br />
-
-<input type="radio" id="open" name="status" value="Open" <%= post.status ===
-'Open' ? 'checked' : '' %> />
-<label for="open">Open</label><br />
-<input type="radio" id="inProcess" name="status" value="In process" <%=
-post.status === 'In process' ? 'checked' : '' %> />
-<label for="inProcess">In process</label><br />
-<input type="radio" id="closed" name="status" value="Closed" <%= post.status ===
-'Closed' ? 'checked' : '' %> />
-<label for="closed">Closed</label><br />
-
-<br />
-
-<label for="image">Image:*</label>
-<br />
-<input name="image" type="file" multiple/>
-<p>Max: 3 images</p>
-<br />
-<label for="description">Description:*</label>
-<br />
-<textarea name="description" cols="30" rows="10" required>
+<div class="image">
+  <label for="image">Image:*</label>
+  <br />
+  <input name="image" type="file" multiple />
+  <p>Max: 3 images</p>
+</div>
+<div class="description">
+  <label for="description">Description:*</label>
+  <br />
+  <textarea name="description" cols="30" rows="6" required>
 <%= post.description %></textarea
->
+  >
+</div>
 <br />
-<label for="latitude">Latitude:</label>
+<div class="coordinates">
+  <label for="latitude">Latitude:</label>
+  <br />
+  <input
+    min="-90"
+    max="90"
+    type="number"
+    step="any"
+    name="latitude"
+    placeholder="Incident latitude"
+    value="<%= post.latitude %>"
+  />
+  <br />
+  <label for="longitude">Longitude:</label>
+  <br />
+  <input
+    min="-180"
+    max="180"
+    type="number"
+    step="any"
+    name="longitude"
+    placeholder="Incident longitude"
+    value="<%= post.longitude %>"
+  />
+</div>
 <br />
-<input
-min="-90"
-max="90"
-  type="number"
-  step="any"
-  name="latitude"
-  placeholder="latitude"
-  value="<%= post.latitude %>"
-/>
+<div class="city-country">
+  <label for="city">City:*</label>
+  <br />
+  <input
+    type="text"
+    name="city"
+    required
+    placeholder="City"
+    value="<%= post.city %>"
+  />
+  <br />
+  <label for="country">Country:*</label>
+  <br />
+  <input
+    type="text"
+    name="country"
+    required
+    placeholder="Country"
+    value="<%= post.country %>"
+  />
+</div>
 <br />
-<label for="longitude">Longitude:</label>
+<div class="level">
+  <input type="radio" id="low" name="level" value="Low" checked />
+  <label for="low">Low</label><br />
+  <input type="radio" id="moderate" name="level" value="Moderate" />
+  <label for="moderate">Moderate</label><br />
+  <input type="radio" id="high" name="level" value="High" />
+  <label for="high">High</label><br />
+  <input type="radio" id="extreme" name="level" value="Extreme" />
+  <label for="extreme">Extreme</label>
+</div>
 <br />
-<input
-min="-180"
-max="180"
-  type="number"
-  step="any"
-  name="longitude"
-  placeholder="longitude"
-  value="<%= post.longitude %>"
-/>
-
-<br />
-<label for="city">City:*</label>
-<br />
-<input
-  type="text"
-  name="city"
-  required
-  placeholder="city"
-  value="<%= post.city %>"
-/>
-<br />
-<label for="country">Country:*</label>
-<br />
-<input
-  type="text"
-  name="country"
-  required
-  placeholder="country"
-  value="<%= post.country %>"
-/>
-<br />
-
-<input type="radio" id="low" name="level" value="Low" checked />
-<label for="low">Low</label><br />
-<input type="radio" id="moderate" name="level" value="Moderate" />
-<label for="moderate">Moderate</label><br />
-<input type="radio" id="high" name="level" value="High" />
-<label for="high">High</label><br />
-<input type="radio" id="extreme" name="level" value="Extreme" />
-<label for="extreme">Extreme</label>
-
-<br />
-<button type="submit">submit</button>
+<button type="submit" class="btn">Submit</button>
