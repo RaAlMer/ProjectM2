@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 // environment variables
 dotenv.config();
 
-mongoose.connect(process.env.MONGODB_URL);
+mongoose.connect(process.env.MONGODB_URL); 
 
 const app = express();
 
