@@ -11,62 +11,75 @@ const imgUploader = require('../cloudinary.config');
 
 // GET Sign-up/Log-in route
 router.get('/sign-log', (req, res) => {
-  res.render('user/logInSignUp', {message: ""});
+  if (req.session.currentUser) {
+    res.redirect('/');
+  } else {
+    res.render('user/logInSignUp', { message: '' });
+  }
 });
 
 // POST route to create account
 router.post('/signup', async (req, res, next) => {
-  const { username, email, password, repeatPassword } = req.body;
-  if (password === repeatPassword) {
-    try {
-      const salt = await bcrypt.genSalt(saltRounds);
-      const hashedPassword = await bcrypt.hash(password, salt);
-      const user = await User.create({
-        username,
-        email,
-        password: hashedPassword,
-      });
-      await user.save();
-      res.redirect('/');
-    } catch (error) {
+  if (req.session.currentUser) {
+    res.redirect('/');
+  } else {
+    const { username, email, password, repeatPassword } = req.body;
+    if (password === repeatPassword) {
+      try {
+        const salt = await bcrypt.genSalt(saltRounds);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const user = await User.create({
+          username,
+          email,
+          password: hashedPassword,
+        });
+        await user.save();
+        res.redirect('/');
+      } catch (error) {
+        res.redirect('/signup');
+      }
+    } else {
       res.redirect('/signup');
     }
-  } else {
-    res.redirect('/signup');
   }
 });
 
+// POST route to log into your account
 router.post('/login', async (req, res) => {
-  try {
-    const user = await User.findOne({ email: req.body.email });
-    const isPwCorrect = await bcrypt.compare(req.body.password, user.password);
-    if (isPwCorrect) {
-      req.session.currentUser = user;
-      res.redirect(`/profile/${user.id}`);
-    } else {
+  if (req.session.currentUser) {
+    res.redirect('/');
+  } else {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+      const isPwCorrect = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
+      if (isPwCorrect) {
+        req.session.currentUser = user;
+        res.redirect(`/profile/${user.id}`);
+      } else {
+        res.redirect('/sign-log');
+      }
+    } catch (error) {
       res.redirect('/sign-log');
     }
-  } catch (error) {
-    res.redirect('/sign-log');
   }
 });
 
-// Get route to Profile page
-
+// GET route to Profile page
 router.get('/profile/:id', isLoggedIn, async (req, res) => {
   const user = await User.findById(req.params.id);
   res.render('user/myprofile', { user });
 });
 
-// Get route to editProfile
-
+// GET route to edit your profile
 router.get('/editProfile/:id', isLoggedIn, async (req, res) => {
   const user = await User.findById(req.params.id);
   res.render('user/editProfile', { user, errorMessage: '' });
 });
 
-// Put route to editProfile page
-
+// PUT route to edit your profile
 router.put(
   '/editProfile/:id',
   isLoggedIn,

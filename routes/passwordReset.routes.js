@@ -9,10 +9,12 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const saltRounds = 12;
 
+// GET route to display the reset password page
 router.get('/', async (req, res) => {
   res.render('user/resetPassword');
 });
 
+// POST route to send email to change password
 router.post('/', async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -26,13 +28,11 @@ router.post('/', async (req, res) => {
         token: crypto.randomBytes(32).toString('hex'),
       }).save();
     }
-
     const link =
       'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
       'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
       `http://${req.headers.host}/password-reset/${user._id}/${token.token}\n\n` +
       'If you did not request this, please ignore this email and your password will remain unchanged.\n';
-
     await sendEmail(user.email, 'Password reset', link);
     res.render('user/passSent');
   } catch (error) {
@@ -40,6 +40,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+// GET route to change the password using the token from the email
 router.get('/:id/:token', async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -53,6 +54,7 @@ router.get('/:id/:token', async (req, res) => {
   }
 });
 
+// POST route to change the password using the token from the email
 router.post('/:id/:token', async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -73,7 +75,6 @@ router.post('/:id/:token', async (req, res) => {
     res.render('user/logInSignUp');
   } catch (error) {
     res.send('An error occured');
-    console.log(error);
   }
 });
 

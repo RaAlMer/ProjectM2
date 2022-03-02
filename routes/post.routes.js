@@ -5,14 +5,13 @@ const { isLoggedIn } = require('../middlewares/guard');
 const imgUploader = require('../cloudinary.config');
 const User = require('../models/user.model');
 
-// Route to create Post
-
+// GET route to create post
 router.get('/create', isLoggedIn, (req, res) => {
   const post = new Post();
   res.render('post/createPost', { post });
 });
 
-// Route POST
+// POST route to create post
 router.post(
   '/create',
   isLoggedIn,
@@ -51,16 +50,13 @@ router.get('/all', async (req, res) => {
   res.render('post/viewAllPost', { posts });
 });
 
-// Get route to edit the post
-
+// GET route to edit the post
 router.get('/edit/:id', isLoggedIn, async (req, res) => {
   const post = await Post.findById(req.params.id);
-
   res.render('post/editPost', { post });
 });
 
-// Put route to edit the post
-
+// PUT route to edit the post
 router.put('/edit/:id', isLoggedIn,imgUploader.single('image'), async (req, res) => {
   req.post = await Post.findById(req.params.id);
   req.post.title = req.body.title;
@@ -83,11 +79,9 @@ router.put('/edit/:id', isLoggedIn,imgUploader.single('image'), async (req, res)
   }
 });
 
-//Route for upVote
-
+// GET route for upVote
 router.get('/upvote/:id', isLoggedIn, async (req, res) => {
   const post = await Post.findById(req.params.id);
-
   if (!post.upVote.includes(req.session.currentUser._id)) {
     post.upVote.push(req.session.currentUser._id);
     if (post.downVote.includes(req.session.currentUser._id)) {
@@ -104,8 +98,7 @@ router.get('/upvote/:id', isLoggedIn, async (req, res) => {
   res.redirect(req.get('referer'));
 });
 
-//Route for downVote
-
+// GET route for downVote
 router.get('/downvote/:id', isLoggedIn, async (req, res) => {
   const post = await Post.findById(req.params.id);
   if (!post.downVote.includes(req.session.currentUser._id)) {
@@ -121,7 +114,7 @@ router.get('/downvote/:id', isLoggedIn, async (req, res) => {
   res.redirect(req.get('referer'));
 });
 
-// DELETE route delete post
+// DELETE route to delete post
 router.delete('/:id', isLoggedIn, async (req, res) => {
   await Post.findByIdAndDelete(req.params.id);
   const user = await User.findById(req.session.currentUser._id)
@@ -130,8 +123,7 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
   res.redirect('/posts/all');
 });
 
-//Get Route to see the post detail
-
+// GET route to see the post detail
 router.get('/postDetail/:id', isLoggedIn, async (req, res) => {
   const post = await Post.findById(req.params.id)
     .populate('user')
