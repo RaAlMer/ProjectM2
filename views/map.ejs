@@ -1,4 +1,3 @@
-<h2>map</h2>
 <link
   rel="stylesheet"
   href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -14,7 +13,7 @@
 <style>
   #map {
     height: 800px;
-    width: 1500px;
+    width: 1519px;
   }
 </style>
 <div id="map"></div>
@@ -22,7 +21,7 @@
   <% if(postCoordinates){%>
     let map = L.map('map').setView(<%= JSON.stringify(postCoordinates) %>, 13);
   <%} else{%>
-    let map = L.map('map').setView([38.971726, -9.418499], 13);
+    let map = L.map('map').setView([40.416729, -3.703339], 13);
  <% } %>
  
   L.tileLayer(

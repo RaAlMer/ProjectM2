@@ -14,9 +14,6 @@ router.get('/sign-log', (req, res) => {
   res.render('user/logInSignUp', {message: ""});
 });
 
-/* // GET route to display the signup form
-router.get('/signup', (req, res, next) => res.render('user/signup')); */
-
 // POST route to create account
 router.post('/signup', async (req, res, next) => {
   const { username, email, password, repeatPassword } = req.body;
@@ -38,14 +35,6 @@ router.post('/signup', async (req, res, next) => {
     res.redirect('/signup');
   }
 });
-
-/* // GET route to log in page
-
-router.get('/login', (req, res) => {
-  res.render('user/login');
-}); */
-
-// Post route to log in page
 
 router.post('/login', async (req, res) => {
   try {
@@ -73,7 +62,7 @@ router.get('/profile/:id', isLoggedIn, async (req, res) => {
 
 router.get('/editProfile/:id', isLoggedIn, async (req, res) => {
   const user = await User.findById(req.params.id);
-  res.render('user/editProfile', { user });
+  res.render('user/editProfile', { user, errorMessage: '' });
 });
 
 // Put route to editProfile page
@@ -107,6 +96,7 @@ router.put(
   }
 );
 
+//GET route for logout
 router.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/');
