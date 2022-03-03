@@ -5,8 +5,9 @@
 <div class="mainContainer">
   <div class="profileImage">
     <img src="<%= user.img %> " alt="avatar" />
-
-    <a id="editBtn" href="/editProfile/<%= user.id %>">Edit Profile</a>
+    <% if (currentUser._id === user._id.toString()) { %> 
+      <a id="editBtn" href="/editProfile/<%= user.id %>">Edit Profile</a>
+    <% } %>
   </div>
   <div class="userInfo">
     <h4>User: <%= user.username %></h4>

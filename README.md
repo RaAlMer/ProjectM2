@@ -232,4 +232,4 @@ The url to your repository and to your deployed project
 
 The url to your presentation slides
 
-[Slides Link](http://slides.com)
+[Slides Link](https://docs.google.com/presentation/d/e/2PACX-1vQP_WF2DXXpCIEUj6Usa54g9nQW06xNCn2E4rV-VZaAbtdhuM_R48cvhnx9tzwBUTiR2PApdOVEfOQA/pub?start=false&loop=false&delayms=60000)

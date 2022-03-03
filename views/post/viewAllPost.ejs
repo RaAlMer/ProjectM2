@@ -9,15 +9,12 @@
           <img class="images" src="<%= post.image[0] %>" alt="Image" />
         </div>
         <div class="description">
-          <label for="description">Description:</label>
-        
+          <p>Description:</p>
           <p class="descriptionBox"><%= post.description %></p>
         </div>
         <div class="loclev">
-          <label for="location">Location:</label>
-          <p><%= post.city %>, <%= post.country %></p>
-          <label for="level">Level:</label>
-          <p><%= post.level%></p>
+          <p>Location: <%= post.city %>, <%= post.country %></p>
+          <p>Level: <%= post.level%></p>
         </div> 
       </a>
       <div class="editing">
@@ -43,17 +40,15 @@
         </div>
       </div>
       <br />
-
     </li>
     <% }) %> 
-    <br>
-    <div >
-      <% if (currentUser) { %>
-        <a class="creatBackBtns" href="/posts/create">Create post</a>
-        <% } %>
-      <br>
-        <a class="creatBackBtns" href="/">Back home</a>
-    </div>
   </ul>
+  <div class="btns">
+    <% if (currentUser) { %>
+      <a class="creatBackBtns" href="/posts/create">Create post</a>
+      <% } %>
+    <br>
+      <a class="creatBackBtns" href="/">Back home</a>
+  </div>
 </div>
 

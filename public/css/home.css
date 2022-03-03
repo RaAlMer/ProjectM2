@@ -38,18 +38,21 @@ html {
   background-color: #67ad21;
   padding-left: 60px;
   padding-bottom: 80px;
+  padding-right: 60px;
 }
 
 .movement {
   background-color: #67ad21;
   padding-left: 60px;
   padding-bottom: 80px;
+  padding-right: 60px;
 }
 
 .team {
   background-color: #67ad21;
-  padding-left: 60px;
+  padding-left: 100px;
   padding-bottom: 80px;
+  padding-right: 100px;
 }
 
 h1,
@@ -65,10 +68,14 @@ h4 {
   padding-bottom: 20px;
 }
 
+.text {
+  text-align: justify;
+}
+
 .theTeam {
   padding-top: 30px;
   display: flex;
-  gap: 300px;
+  gap: 220px;
 }
 
 .belchior,
@@ -77,8 +84,14 @@ h4 {
   gap: 50px;
 }
 
-.imageTeamMember {
+.imageTeamMemberBel {
   width: 300px;
+  height: 140px;
+}
+
+.imageTeamMemberRaul {
+  width: 300px;
+  height: 140px;
 }
 
 .scale-up-hor-center {
@@ -90,6 +103,8 @@ h4 {
 
 .youtube {
   margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
 }
 
 @-webkit-keyframes scale-up-hor-center {

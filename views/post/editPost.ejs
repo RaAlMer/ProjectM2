@@ -1,4 +1,6 @@
-<form action="/posts/edit/<%= post.id %>?_method=PUT" method="post" enctype="multipart/form-data">
-    <%-  include("_postForm") %> 
-</form>
-<a href="/posts/all">Back View All</a>
+<div class="container">
+    <form action="/posts/edit/<%= post.id %>?_method=PUT" method="post" enctype="multipart/form-data">
+        <%-  include("_postForm") %> 
+    </form>
+    <a class="backAll" href="/posts/all">Back View All</a>
+</div>

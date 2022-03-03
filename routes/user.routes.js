@@ -76,7 +76,11 @@ router.get('/profile/:id', isLoggedIn, async (req, res) => {
 // GET route to edit your profile
 router.get('/editProfile/:id', isLoggedIn, async (req, res) => {
   const user = await User.findById(req.params.id);
-  res.render('user/editProfile', { user, errorMessage: '' });
+  if (req.session.currentUser._id === user.id.toString()){
+    res.render('user/editProfile', { user, errorMessage: '' });
+  } else {
+    res.redirect(`/profile/${req.params.id}`);
+  }  
 });
 
 // PUT route to edit your profile
