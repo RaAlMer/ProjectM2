@@ -185,6 +185,7 @@ Comment model
 
 ```
 user: ObjectId<User>
+username: String
 title: String
 image: [String]
 description: String

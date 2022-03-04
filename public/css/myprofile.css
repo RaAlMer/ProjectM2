@@ -3,10 +3,10 @@
     color: white;
   }
 
-
 #pageTitle{
     padding-top: 50px;
     padding-bottom: 50px;
+    padding-left: 10px;
 }  
 
 .mainContainer{
@@ -18,6 +18,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-left: 20px;
 }
 
 .userInfo{
@@ -26,7 +27,6 @@
     gap: 10px;
     padding-left: 30px;
 }
-
 
 #editBtn{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
