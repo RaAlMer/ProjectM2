@@ -14,6 +14,9 @@ const commentSchema = new Schema(
       type: SchemaTypes.ObjectId,
       ref: 'User',
     },
+    username:{
+      type : String,
+    },
     upVote: {
       type: [SchemaTypes.ObjectId],
       ref: 'User',

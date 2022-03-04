@@ -21,6 +21,7 @@ router.post('/:id', isLoggedIn, imgUploader.array('comImage', 3), async (req, re
     image: preImage,
     description: req.body.description,
     user: req.session.currentUser._id,
+    username: user.username
   });
   post.comments.push(comments.id);
   user.score += 1;
@@ -29,5 +30,20 @@ router.post('/:id', isLoggedIn, imgUploader.array('comImage', 3), async (req, re
   await user.save();
   res.redirect(`/posts/postDetail/${req.params.id}`);
 });
+
+
+
+// DELETE route to delete comment
+router.delete('/:id', isLoggedIn, async (req, res) => {
+  await Comment.findByIdAndDelete(req.params.id);
+  const user = await User.findById(req.session.currentUser._id);
+  user.score -= 1;
+  await user.save();
+  res.redirect(req.get('referer'));
+
+});
+
+
+
 
 module.exports = router;

@@ -1,50 +1,63 @@
 <link rel="stylesheet" href="../css/editProfile.css" />
 <div class="mainContainerEditProfile">
-  <label for="username">Username:</label>
-  <br />
-  <input
-    type="text"
-    name="username"
-    required
-    placeholder="username"
-    value="<%= user.username %>"
-  />
-  <br />
-  <br />
-
-  <input name="profileImage" type="file" />
-
-  <br />
-  <div class="country">
-    <label for="country">Country:</label>
+  <div class="info">
+    <div class="username">
+      <label for="username"><b>Username</b>:</label>
+      <br />
+      <input
+        type="text"
+        name="username"
+        required
+        placeholder="username"
+        value="<%= user.username %>"
+      />
+    </div>
+  
     <br />
-    <input
-      type="text"
-      name="country"
-      placeholder="country"
-      value="<%= user.country %>"
-    />
-  </div>
+    <div class="profileImage"> 
+      <p><b>Profile image:</b></p>
+      <input name="profileImage" type="file" />
+    </div>
 
-  <br />
-  <div class="gender">
-    <label for="gender">Gender:</label>
-
+  
     <br />
-    <input type="radio" id="male" name="gender" value="Male" <%= user.gender ===
-    'Male' ? 'checked' : '' %> />
-    <label for="male">Male</label><br />
-    <input type="radio" id="female" name="gender" value="Female" <%= user.gender
-    === 'Female' ? 'checked' : '' %> />
-    <label for="female">Female</label><br />
-    <input type="radio" id="preferNotToTell" name="gender" value="Prefer not to
-    tell" <%= user.gender === 'Prefer not to tell' ? 'checked' : '' %> />
-    <label for="preferNotToTell">Prefer not to tell</label><br />
-    <input type="radio" id="notSpecified" name="gender" value="Not specified"
-    <%= user.gender === 'Not specified' ? 'checked' : '' %> />
-    <label for="notSpecified">Not specified</label>
-  </div>
+    <div class="country">
+      <label for="country"><b>Country</b>:</label>
+      <br />
+      <input
+        type="text"
+        name="country"
+        placeholder="country"
+        value="<%= user.country %>"
+      />
+    </div>
+  
+    <br />
+    <div class="gender">
+      <label for="gender"> <b>Gender:</b></label>
+  
+      <br />
+      <div class="options">
+        <input type="radio" id="male" name="gender" value="Male" <%= user.gender ===
+        'Male' ? 'checked' : '' %> />
+        <label for="male">Male</label><br />
+        <input type="radio" id="female" name="gender" value="Female" <%= user.gender
+        === 'Female' ? 'checked' : '' %> />
+        <label for="female">Female</label><br />
+        <input type="radio" id="preferNotToTell" name="gender" value="Prefer not to
+        tell" <%= user.gender === 'Prefer not to tell' ? 'checked' : '' %> />
+        <label for="preferNotToTell">Prefer not to tell</label><br />
+        <input type="radio" id="notSpecified" name="gender" value="Not specified"
+        <%= user.gender === 'Not specified' ? 'checked' : '' %> />
+        <label for="notSpecified">Not specified</label>
+      </div>
 
-  <br />
-  <button class="saveBtn" type="submit">Save changes</button>
+    </div>
+  
+    <br />
+    <button class="saveBtn" type="submit">Save changes</button>
+  </div>
+<div class="image">
+  <img id="theImage" src="/images/editProfile.png" alt="Cartoon Pic">
+</div>
 </div>

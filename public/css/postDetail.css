@@ -2,13 +2,30 @@
   background-color: #67ad21;
 }
 
-h2,h4,small,label,p,ul,li{
-    color:white
+.main {
+  display: flex;
+  gap: 200px;
+  flex-wrap: wrap;
 }
 
-.images {
+h2,
+h4,
+small,
+label,
+p,
+ul,
+li {
+  color: white;
+}
+
+.imagesPost {
   width: 350px;
-  height: 350px;
+  height: 200px;
+}
+
+.imagesComment {
+  width: 250px;
+  height: 120px;
 }
 
 html {
@@ -16,38 +33,100 @@ html {
 }
 
 label {
-    font-size: larger;
-  }
+  font-size: larger;
+}
 
-  a{
-      
-      text-decoration: none;
-  }
+a {
+  text-decoration: none;
+}
 
-.thePost, .comments, .addComments {
+.thePost,
+.comments,
+.addComments {
   padding-left: 20px;
 }
 
 .theDescription {
   border: 1px solid black;
-  width: 1050px;
+  width: 500px;
   height: 150px;
 }
 
-#submitBtn{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    height: 32px;
-    width: 80px;
-    text-decoration: none;
-    border: 3px rgba(235, 255, 0, 0.66) solid;
-    border-radius: 15px;
-    text-align: center;
-    font-weight: bold;
-    color: rgba(235, 255, 0, 0.66);
-    background-color: #67ad21;
+#submitBtn {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  height: 32px;
+  width: 80px;
+  text-decoration: none;
+  border: 3px rgba(235, 255, 0, 0.66) solid;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: rgba(235, 255, 0, 0.66);
+  background-color: #67ad21;
 }
 
-#submitBtn:hover{
-    border: 3px black solid;
-    color: black;
+#submitBtn:hover {
+  border: 3px black solid;
+  color: black;
+}
+
+.eachComment {
+  list-style: none;
+  border: 1px rgba(235, 255, 0, 0.66) solid;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.eachComment img {
+  align-self: center;
+}
+
+.eachComment b,p, small, .DeleteComment  {
+padding-left: 5px;
+}
+
+#deleteComment{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  height: 32px;
+  width: 160px;
+  text-decoration: none;
+  border: 1px rgba(235, 255, 0, 0.66) solid;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: rgba(235, 255, 0, 0.66);
+  background-color: #67ad21;
+}
+
+#deleteComment:hover {
+  border: 1px black solid;
+  color: black;
+}
+
+.DeleteComment{
+  margin-bottom: 10px;
+}
+
+.backAll{
+ 
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -80px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  height: 32px;
+  width: 180px;
+  text-decoration: none;
+  border: 3px rgba(235, 255, 0, 0.66) solid;
+  border-radius: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: rgba(235, 255, 0, 0.66);
+  background-color: #67ad21;
+}
+
+.backAll:hover {
+  border: 3px black solid;
+  color: black;
 }

@@ -4,6 +4,7 @@ const Post = require('../models/post.model');
 const { isLoggedIn } = require('../middlewares/guard');
 const imgUploader = require('../cloudinary.config');
 const User = require('../models/user.model');
+const Comment = require('../models/comment.model');
 
 // GET route to create post
 router.get('/create', isLoggedIn, (req, res) => {
@@ -20,7 +21,7 @@ router.post(
     let preImage = [];
     req.post = new Post();
     req.post.title = req.body.title;
-    req.files.forEach(img => {
+    req.files.forEach((img) => {
       preImage.push(img.path);
     });
     req.post.image = preImage;
@@ -32,10 +33,10 @@ router.post(
     req.post.latitude = req.body.latitude;
     req.post.user = req.session.currentUser._id;
     try {
-      const user = await User.findById(req.session.currentUser._id)
+      const user = await User.findById(req.session.currentUser._id);
       user.posts.push(req.post.id);
-      user.score += 10
-      await user.save()
+      user.score += 10;
+      await user.save();
       await req.post.save();
       res.redirect('/posts/all');
     } catch (error) {
@@ -57,27 +58,32 @@ router.get('/edit/:id', isLoggedIn, async (req, res) => {
 });
 
 // PUT route to edit the post
-router.put('/edit/:id', isLoggedIn,imgUploader.single('image'), async (req, res) => {
-  req.post = await Post.findById(req.params.id);
-  req.post.title = req.body.title;
-  req.post.status = req.body.status;
-  if(req.file){
-  req.post.image = req.file.path;
+router.put(
+  '/edit/:id',
+  isLoggedIn,
+  imgUploader.single('image'),
+  async (req, res) => {
+    req.post = await Post.findById(req.params.id);
+    req.post.title = req.body.title;
+    req.post.status = req.body.status;
+    if (req.file) {
+      req.post.image = req.file.path;
+    }
+    req.post.description = req.body.description;
+    req.post.city = req.body.city;
+    req.post.country = req.body.country;
+    req.post.level = req.body.level;
+    req.post.longitude = req.body.longitude;
+    req.post.latitude = req.body.latitude;
+    req.post.user = req.session.currentUser._id;
+    try {
+      await req.post.save();
+      res.redirect('/posts/all');
+    } catch (error) {
+      res.redirect('/posts/edit/:id');
+    }
   }
-  req.post.description = req.body.description;
-  req.post.city = req.body.city;
-  req.post.country = req.body.country;
-  req.post.level = req.body.level;
-  req.post.longitude = req.body.longitude;
-  req.post.latitude = req.body.latitude;
-  req.post.user = req.session.currentUser._id;
-  try {
-    await req.post.save();
-    res.redirect('/posts/all');
-  } catch (error) {
-    res.redirect('/posts/edit/:id');
-  }
-});
+);
 
 // GET route for upVote
 router.get('/upvote/:id', isLoggedIn, async (req, res) => {
@@ -91,8 +97,8 @@ router.get('/upvote/:id', isLoggedIn, async (req, res) => {
       );
     }
   }
-  const user = await User.findById(post.user) 
-  user.score +=5
+  const user = await User.findById(post.user);
+  user.score += 5;
   user.save();
   post.save();
   res.redirect(req.get('referer'));
@@ -107,8 +113,8 @@ router.get('/downvote/:id', isLoggedIn, async (req, res) => {
       post.upVote.splice(post.upVote.indexOf(req.session.currentUser._id), 1);
     }
   }
-  const user = await User.findById(post.user) 
-  user.score -=5
+  const user = await User.findById(post.user);
+  user.score -= 5;
   user.save();
   post.save();
   res.redirect(req.get('referer'));
@@ -117,9 +123,9 @@ router.get('/downvote/:id', isLoggedIn, async (req, res) => {
 // DELETE route to delete post
 router.delete('/:id', isLoggedIn, async (req, res) => {
   await Post.findByIdAndDelete(req.params.id);
-  const user = await User.findById(req.session.currentUser._id)
-  user.score -= 10
-  await user.save()
+  const user = await User.findById(req.session.currentUser._id);
+  user.score -= 10;
+  await user.save();
   res.redirect('/posts/all');
 });
 

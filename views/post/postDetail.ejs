@@ -1,87 +1,112 @@
 <link rel="stylesheet" href="/css/postDetail.css" />
 <link rel="stylesheet" href="/css/layout.css" />
-<div class="thePost">
-  <h2><%= post.title %></h2>
-  <h4>Status: <%= post.status %> </h4>
-  <small>
-    Created by:
-    <a href="/profile/<%= post.user._id %> "><%= post.user.username %></a>
-  </small>
-  <br />
-  <% post.image.forEach(img => { %>
-    <img class="images" src="<%= img %>" alt="Image" />
-  <% }) %>
-  <br />
-  <br />
-  <label for="description">Description:</label>
-  <p class="theDescription"><%= post.description %></p>
-  <br />
-  <label for="level">Level:</label>
-  <p><%= post.level%></p>
-  <br />
-  <label for="location">Location:</label>
-  <p><%= post.city %>, <%= post.country %></p>
-  <br />
-  <label for="coords">Latitude and Longitude:</label>
-  <% if (post.latitude && post.longitude) { %>
-<a href="/map/<%= post.id %>">See Coordinates</a>
-  <% } %>
-
-<br>
-<a href="/posts/upvote/<%= post.id %> "
-  ><i class="fa fa-thumbs-up" aria-hidden="true"></i
-></a>
-<span><%= post.upVote.length %></span>
-<a href="/posts/downvote/<%= post.id %> "
-  ><i class="fa fa-thumbs-down" aria-hidden="true"></i
-></a>
-<span><%= post.downVote.length %></span>
-</div>
-
-<% if (currentUser) { %> <% if (post.user.toString() === currentUser._id) { %>
-<a href="/posts/edit/<%= post.id %>">Edit post</a>
-<form action="/posts/<%= post.id %>?_method=DELETE" method="post">
-  <button type="submit">Delete post</button>
-</form>
-<% } %> <% } %>
-<div class="comments">
-<h4>Comments:</h4>
-<ul>
-  <% post.comments.forEach((comment)=>{%>
-  <li>
-    <%= comment.title %>
+<div class="main">
+  <div class="thePost">
+    <h2><%= post.title %></h2>
+    <h4>Status: <%= post.status %></h4>
+    <small>
+      Created by:
+      <a href="/profile/<%= post.user._id %> "><%= post.user.username %></a>
+    </small>
     <br />
-    <% comment.image.forEach(img => { %>
-    <img class="images" src="<%= img %>" alt="Image" />
+    <% post.image.forEach(img => { %>
+    <img class="imagesPost" src="<%= img %>" alt="Image" />
     <% }) %>
     <br />
-    <%= comment.description %>
     <br />
-    <small
-      >Posted at: <%= comment.createdAt.toLocaleDateString() %> <%=
-      comment.createdAt.toLocaleTimeString() %>
-    </small>
-  </li>
-  <% }) %>
-</ul>
+    <label for="description">Description:</label>
+    <p class="theDescription"><%= post.description %></p>
+    <br />
+    <label for="level">Level:</label>
+    <p><%= post.level%></p>
+    <br />
+    <label for="location">Location:</label>
+    <p><%= post.city %>, <%= post.country %></p>
+    <br />
+    <label for="coords">Latitude and Longitude:</label>
+    <% if (post.latitude && post.longitude) { %>
+    <a href="/map/<%= post.id %>">See Coordinates</a>
+    <% } %>
+
+    <br />
+    <a href="/posts/upvote/<%= post.id %> "
+      ><i class="fa fa-thumbs-up" aria-hidden="true"></i
+    ></a>
+    <span><%= post.upVote.length %></span>
+    <a href="/posts/downvote/<%= post.id %> "
+      ><i class="fa fa-thumbs-down" aria-hidden="true"></i
+    ></a>
+    <span><%= post.downVote.length %></span>
+  </div>
+  <div class="comments">
+    <% if (currentUser) { %> <% if (post.user.toString() === currentUser._id) {
+    %>
+    <a href="/posts/edit/<%= post.id %>">Edit post</a>
+    <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
+      <button type="submit">Delete post</button>
+    </form>
+    <% } %> <% } %>
+    <div class="comments">
+      <h4>Comments:</h4>
+      <ul>
+        <% post.comments.forEach((comment)=>{%>
+        <li class="eachComment">
+          <b><%= comment.title %></b>
+          <% comment.image.forEach(img => { %>
+          <img class="imagesComment" src="<%= img %>" alt="Image" />
+          <% }) %>
+         <p><%= comment.description %></p>
+          
+          <small
+            >Posted at: <%= comment.createdAt.toLocaleDateString() %> <%=
+            comment.createdAt.toLocaleTimeString() %> by
+            <a href="/profile/<%= comment.user._id %> "
+              ><%= comment.username %>
+            </a>
+          </small>
+          <div class="DeleteComment">
+            <% if (comment.user._id.toString() === currentUser._id) { %>
+            <form
+              action="/comment/<%= comment.id %>?_method=DELETE"
+              method="post"
+            >
+              <button id="deleteComment" type="submit">Delete comment</button>
+            </form>
+            <% } %>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div class="addComments">
+      <form
+        action="/comment/<%= post.id %> "
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <input
+          type="text"
+          name="title"
+          placeholder="title"
+          style="color: white"
+        />
+        <br />
+        <input name="comImage" type="file" multiple />
+        <p>Max: 3 images</p>
+
+        <textarea
+          name="description"
+          cols="30"
+          rows="10"
+          style="color: white"
+        ></textarea>
+        <br />
+        <button id="submitBtn" type="submit">Comment</button>
+      </form>
+    </div>
+  </div>
+  <a class="backAll" href="/posts/all">Back All Posts</a>
 </div>
 
-<div class="addComments">
-  <form
-  action="/comment/<%= post.id %> "
-  method="post"
-  enctype="multipart/form-data"
->
-  <input type="text" name="title" placeholder="title" style="color: white;" />
-  <br />
-  <input name="comImage" type="file" multiple />
-  <p>Max: 3 images</p>
 
-  <textarea name="description" cols="30" rows="10" style="color: white;"></textarea>
-  <br />
-  <button id="submitBtn" type="submit">Comment</button>
-</form>
-</div>
-
-
-<a href="/posts/all">Back All Posts</a>
