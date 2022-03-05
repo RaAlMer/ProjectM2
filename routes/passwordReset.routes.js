@@ -72,7 +72,7 @@ router.post('/:id/:token', async (req, res) => {
     user.password = hashedPassword;
     await user.save();
     await token.delete();
-    res.render('user/logInSignUp');
+    res.render('user/logInSignUp', {errorMessage: ''});
   } catch (error) {
     res.send('An error occured');
   }
