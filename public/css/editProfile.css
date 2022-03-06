@@ -24,7 +24,6 @@
 
 .country {
   margin-top: 20px;
-  
 }
 
 .country input {
@@ -35,8 +34,6 @@
 
 .gender {
   margin-top: 20px;
-
-
 }
 
 .options{
@@ -44,7 +41,6 @@
   border-radius: 5px; 
   width: 200px;
 }
-
 
 .saveBtn {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

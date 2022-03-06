@@ -91,3 +91,6 @@ body {
     border-left: 1px solid #CCCCCC;
     border-radius: 20px;
   }
+  .back {
+    padding-bottom: 80px;
+  }
